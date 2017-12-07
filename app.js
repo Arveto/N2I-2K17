@@ -11,20 +11,50 @@ var connection = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
         password : 'root',
-        database : 'DBNAME' //TODO changer nom DB
+        database : 'arvauto'
     });
 
 app.use(express.static(path.join(__dirname, 'public')));
 var urlencodedParser = bodyParser.urlencoded({extended: false});
-app.use(cookieParser());
 
     //Routes
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
 
+app.get('/events', function(req, res){
+    res.sendFile(__dirname + '/events.html');
+});
 
-    //chatEvents
+app.get('/events/:eventId', function(req, res){
+    res.sendFile(__dirname + '/events.html');
+});
 
+app.get('/sam', function(req, res){
+    res.sendFile(__dirname + '/sam.html');
+});
+
+app.get('/sam/:samId', function(req, res){
+    res.sendFile(__dirname + '/sam.html');
+});
+
+app.get('/about', function(req, res){
+    res.sendFile(__dirname + '/about.html');
+});
+
+    //Inscription / login form
+app.post('/signup', urlencodedParser, function(req, res){
+    var queryString = "INSERT INTO arvauto_users (`email`, `pass`, `familyname`, `firstname`) VALUES (?, ?, ?, ?)";
+    connection.query(queryString, [email, password, familyname, firstname], function(error, result, fields){
+        if (error) throw error;
+    };
+    res.cookie('email', req.body.email);
+    res.cookie('familyname', req.body.familyname);
+    res.cookie('firstname', req.body.firstname);
+});
+
+    //Socket.io
 io.sockets.on('connection', function(socket){
-
 });
 
 server.listen(80);
