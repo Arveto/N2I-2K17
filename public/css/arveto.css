@@ -1,0 +1,327 @@
+/*
+	Arvauto CSS v1.0
+	(C) Arveto software
+*/
+
+@CHARSET "UTF-8";
+
+/* general */
+html {
+	height:100%;
+	width: 100%;
+}
+
+body.arvauto {
+	background: url("../images/background.jpg") fixed center no-repeat #17476F;
+	font-family: 'Nunito', sans-serif;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+*.arvauto-button {
+	transition: background 1s, transform 1s, color 1s;
+	text-decoration: none;
+	transform: scale(1,1);
+	display: inline-block;
+	border-radius: 15px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	z-index:0;
+}
+
+*.arvauto-button:hover {
+	display: inline-block;
+	transform: scale(1.1,1.1);
+	z-index:1;
+}
+
+span.arveto-inline-span {
+	display: inline-block;
+}
+
+	/* menus */
+
+a.arvauto-menuitem {
+	background: #6796C2;
+	border-radius: 10%;
+	position: relative;
+	top: 30px;
+}
+
+span.arvauto-menuitem-legend {
+	transition: opacity 1s;
+	position: relative;
+	color: white;
+	right: 0;
+	top: 0;
+	height: 30px;
+	opacity: 0;
+}
+
+a.arvauto-menuitem:hover span.arvauto-menuitem-legend {
+	opacity: 100;
+}
+
+a.arvauto-menuitem:hover {
+	background: #0D2A43;
+}
+
+/* home page */
+	/* header */
+header.arvauto-main-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+
+header.arvauto-main-header img.arvauto-logo {
+	width:100%
+}
+
+	/* footer */
+footer.arvauto-main-footer {
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	position: fixed;
+	bottom: 3%;
+	left: 0;
+}
+
+footer.arvauto-main-footer button.arvauto-login-popup-trigger {
+	border-radius: 15px;
+	background: #0D2A43;
+	font-weight: bold;
+	cursor: pointer;
+	color: white;
+	width: 200px;
+	height: 30px;
+	border: none;
+}
+
+footer.arvauto-main-footer button.arvauto-login-popup-trigger:hover {
+	background: #6796C2;
+	color: #0D2A43;
+}
+
+/* sam games page */
+
+body#arvauto-page-sam {
+	background-image: url("../images/sam_background.jpg");
+}
+
+section.arvauto-sam-menu,
+section.arvauto-sam-menu table {
+	width: 100%;
+	height: 100%;
+}
+
+section.arvauto-sam-menu tr {
+	width: 100%;
+}
+
+section.arvauto-sam-menu td {
+	padding: 0;
+}
+
+section.arvauto-sam-help {
+	transform: translateX(-50%);
+	position: relative;
+	width: 80%;
+	height: 100%;
+	left: 50%;
+}
+
+section.arvauto-sam-help img {
+	position: absolute;
+	width: 100%;
+	z-index:0;
+	left: 0;
+	top: 0;
+}
+
+div#arvauto-sam-help {
+	word-wrap: break-word;
+	position: absolute;
+	overflow-y: scroll;
+	font-size: 20px;
+	height: 220px;
+	padding: 3%;
+	z-index:1;
+	left: 2%;
+	top: 7%;
+	width: 57%;
+}
+
+a.arvauto-sam-link {
+	background: #6796C2;
+	position: absolute;
+	padding: 5px 0;
+	width: 100px;
+	color: white;
+	z-index: 2;
+	left: 5%;
+	top: 60%;
+}
+
+a.arvauto-sam-link:hover {
+	background: #0D2A43;
+}
+
+section.arvauto-sam-menu tr.arvauto-sam-section-names {
+	height: 7%;
+}
+
+section.arvauto-sam-menu tr.arvauto-sam-section-contents {
+	height: 93%;
+}
+
+section.arvauto-sam-menu th,
+section.arvauto-sam-menu th {
+	width:50%;
+}
+
+h2.arvauto-sam-games,
+h2.arvauto-sam-description {
+	font-size: 50px;
+}
+
+h2.arvauto-sam-games {
+	color: white;
+}
+
+/* popups */
+
+.arvauto-popup {
+	z-index: 100;
+	visibility: hidden;
+}
+
+	/* login popup */
+.arvauto-login-pane {
+	background: rgba(0,0,0,0.8);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.arvauto-login {
+	transform: translate(-200px,-150px);
+	background: #194C75;
+	border-radius: 10px;
+	color: white;
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+.arvauto-login h2 {
+	border-radius: 10px 10px 0 0;
+	background: #0D2A43;
+	text-align: center;
+	padding: 5px;
+	margin: 0;
+}
+
+.arvauto-login form {
+	padding: 0;
+	margin: 20px auto;
+	width: 70%;
+}
+
+.arvauto-login form section.arvauto-form-section, 
+.arvauto-login form section.arvauto-login-button-pane {
+	margin: 20px 0;
+}
+
+.arvauto-login form section.arvauto-form-section {
+	
+}
+
+.arvauto-login form section.arvauto-login-button-pane {
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.arvauto-login form .arvauto-login-label, 
+.arvauto-login form .arvauto-login-input {
+	display: block;
+	width: 100%;
+}
+
+.arvauto-login form .arvauto-login-label {
+	height: 25px;
+}
+
+.arvauto-login form .arvauto-login-input {
+	padding: 5px 10px;
+	height: 30px;
+	border: none;
+}
+
+.arvauto-login form .arvauto-login-button {
+	font-family: 'Nunito', sans-serif;
+	background: #6796C2;
+	margin: 0 10px;
+	padding: 0;
+	border: none;
+	color: white;
+	width: 100px;
+	height: 30px;
+	cursor: pointer;
+	align-items: center;
+	text-decoration: none;
+	border-radius: 15px;
+	font-size: 15px;
+}
+
+/* main menu */
+
+section.arvauto-main-menu {
+	width: 100%;
+	height: 300px;
+	transform: translateY(-150px);
+	position: fixed;
+	top: 50%;
+	left: 0;
+	text-align: center;
+}
+
+section.arvauto-main-menu a.arvauto-menuitem, 
+section.arvauto-main-menu span.arvauto-menuitem-legend, 
+section.arvauto-main-menu a.arvauto-menuitem img {
+	width: 300px;
+	height: 300px;
+}
+
+section.arvauto-main-menu a.arvauto-menuitem {
+	margin: 0 4%;
+}
+
+/* sam games list menu */
+
+section.arvauto-sam-list {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin: auto;
+}
+
+section.arvauto-sam-list a.arvauto-menuitem, 
+section.arvauto-sam-list span.arvauto-menuitem-legend, 
+section.arvauto-sam-list a.arvauto-menuitem img {
+	width: 200px;
+	height: 200px;
+}
+
+section.arvauto-sam-list a.arvauto-menuitem {
+	margin: 3% 4%;
+}
