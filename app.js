@@ -51,10 +51,73 @@ app.post('/signup', urlencodedParser, function(req, res){
     res.cookie('email', req.body.email);
     res.cookie('familyname', req.body.familyname);
     res.cookie('firstname', req.body.firstname);
+
+    var queryString = "UPDATE users SET socket_id = ? WHERE pass = ?";   //Updates user socket_id
+    connection.query(queryString, [socket.id, req.body.pass], function(error, result, fields){
+        if (error) throw error;
+    });
+
+    var queryString = "UPDATE users SET connected = 1 WHERE pass = ?";   //Updates user connection status
+    connection.query(queryString, [req.body.pass], function(error, result, fields){
+        if (error) throw error;
+    });
+
 });
+
+app.post('/', urlencodedParser, function(req, res){
+    if (error) throw error;
+
+    var familyname;
+    var firstname;
+
+    var loginOK = 1;//TODO Verification login OK
+
+    var queryString = 'SELECT familyname FROM arvauto_users WHERE pass = ?';
+    connection.query(queryString, [req.body.password], function(error, result, fields){
+        if(error){
+            throw error;
+            loginOK = 0;
+        }
+        familyname = result[0].familyname;
+    });
+
+    var queryString = 'SELECT firstname FROM arvauto_users WHERE pass = ?';
+    connection.query(queryString, [req.body.password], function(error, result, fields){
+        if(error){
+            throw error;
+            loginOK = 0;
+        }
+        firstname = result[0].firstname;
+    });
+
+    if(loginOK){
+        res.cookie('email', req.body.email);
+        res.cookie('familyname', familyname);
+        res.cookie('firstname', firstname);
+        res.redirect('/')
+    }
+    else{
+        res.redirect('/');
+    }
+});
+
 
     //Socket.io
 io.sockets.on('connection', function(socket){
+
+    var queryString = "UPDATE users SET event_id = 0 WHERE pass = ?";   //Updates user event_id
+    connection.query(queryString, [req.body.pass], function(error, result, fields){
+        if (error) throw error;
+    });
+
+    var queryString = "UPDATE users SET connected = 0 WHERE pass = ?";   //Updates user connection status
+    connection.query(queryString, [req.body.pass], function(error, result, fields){
+        if (error) throw error;
+    });
+
+    socket.on('disconnect', function(){
+
+    })
 });
 
 server.listen(80);
