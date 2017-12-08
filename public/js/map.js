@@ -1,3 +1,5 @@
+var socket = io.connect('localhost');
+
 window.addEventListener('load',function(){
 
 socket.emit("map");
@@ -5,7 +7,7 @@ socket.emit("map");
 var map;
 var currentPoint;
 
-(function initMap() {
+(function () {
 
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 6,
@@ -46,18 +48,5 @@ function placeMarker(location) {
     });
 }
 })();
-
-
-
-var points = [ {
-                coord: {lat: -33.875, lng: 151.056},
-                eventId: 42
-              },
-              {
-                coord: {lat: -33.673, lng: 150.447},
-                eventId: 666
-              } ];
-
-dispPoints(points);
 
 },false);

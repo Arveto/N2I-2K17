@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Arvauto - Une fenetre sur la route de demain</title>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+<link href="/css/arveto.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body class="arvauto">
+	<header class="arvauto-main-header">
+		<a href="/" class="arvauto-link-button"><img class="arvauto-logo" src="/images/logo.png" /></a>
+	</header>
+	<section class="arvauto-main-menu">
+		<a class="arvauto-button arvauto-menuitem" href="/map"><img src="/images/map.png" /><span class="arveto-inline-span arvauto-menuitem-legend">Evenements</span></a>
+		<a class="arvauto-button arvauto-menuitem" href="/sam"><img src="/images/sam.png" /><span class="arveto-inline-span arvauto-menuitem-legend">Jeux du Sam</span></a>
+		<a class="arvauto-button arvauto-menuitem" href="/about"><img src="/images/about.png" /><span class="arveto-inline-span arvauto-menuitem-legend">A propos</span></a>
+	</section>
+	<footer class="arvauto-main-footer">
+		<button id="login-button" class="arvauto-button arvauto-login-popup-trigger">Connexion</button>
+	</footer>
+	<div tabindex=0 id="login-popup" class="arvauto-popup arvauto-login-pane">
+		<div class="arvauto-login">
+			<h2>Connexion</h2>
+			<form action="" method="post">
+				<section class="arvauto-form-section">
+					<label class="arvauto-form-label arvauto-login-label" for="email">Adresse E-mail :</label> <input class="arvauto-form-input arvauto-login-input" type="text" name="email" placeholder="exemple@foo.com" />
+				</section>
+				<section>
+					<label class="arvauto-form-label arvauto-login-label" for="password">Mot de passe :</label> <input class="arvauto-form-input arvauto-login-input" type="password" name="password" />
+				</section>
+				<section class="arvauto-login-button-pane">
+					<input class="arvauto-button arvauto-login-button" type="submit" value="Connexion"> <a class="arvauto-button arvauto-login-button" href="signup">Inscription</a>
+				</section>
+			</form>
+		</div>
+	</div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io.connect('localhost');
+	$("#login-button").on("click",function(){
+		document.getElementById("login-popup").style.visibility="visible";
+		console.log('Hey');
+	});
+
+	$('#account-button').on('click', function() {
+		$("#account-slide").focus();
+	})
+
+	//Checks for cookies
+	function getCookie(name) {
+    	var dc = document.cookie;
+    	var prefix = name + "=";
+    	var begin = dc.indexOf("; " + prefix);
+    	if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    	}
+    	else
+    	{
+        	begin += 2;
+        	var end = document.cookie.indexOf(";", begin);
+        	if (end == -1) {
+        	end = dc.length;
+        	}
+    	}
+    	// because unescape has been deprecated, replaced with decodeURI
+    	//return unescape(dc.substring(begin + prefix.length, end));
+    	return decodeURI(dc.substring(begin + prefix.length, end));
+	}
+
+	var cookieEmail = getCookie('email');
+	if(cookieEmail != null){
+		console.log("ok");
+		$('#login-button').html('Se déconnecter');
+
+		function delete_cookie(name) {
+  			document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		}
+
+		delete_cookie('email');
+		delete_cookie('familyname');
+		delete_cookie('firstname');
+		$('#login-button').on("click", function(){
+			location.reload();
+		})
+
+	}
+</script>
+</html>

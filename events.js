@@ -1,4 +1,4 @@
-exports.chatEvents = function(socket, connection){
+exports.foo = function(socket, connection){
 
         //The user enters a event
     socket.on('joinEvent', function(id){
@@ -99,7 +99,7 @@ exports.chatEvents = function(socket, connection){
     });
 
         //The user wreates an event
-    socket.on('newEvent'), function(type, description,  latitude, longitude){
+    socket.on('newEvent', function(type, description,  latitude, longitude){
         var queryString = 'SELECT name FROM arvauto_events_types WHERE id = ?';
         var eventId;
         connection.query(queryString, [type], function(error, result, fields){
@@ -111,7 +111,7 @@ exports.chatEvents = function(socket, connection){
         connection.queryString(queryString, [eventId, description, latitude, longitude], function(errer, result, fields){
             if (error) throw error;
         });
-    }
+    });
 
         //The user leaves the event
     socket.on('leaveEvent', function(){

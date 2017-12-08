@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -34,8 +34,58 @@
     </div>
 
     <button>+</button>
-
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/map.js"></script>
     <script type="text/javascript" src="/js/map.events.js"></script>
   </body>
+</html>
+ -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Arvauto - Evenements</title>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+<link href="css/arveto.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWGdneRabFdxPsdNRy0gx4YMdoInHCZsk&callback=initMap"></script>
+</head>
+<body class="arvauto">
+	<section class="arvauto-events">
+
+        <div id="map"></div>
+
+		<button class="arvauto-button arvauto-add-event">+</button>
+		<button class="arvauto-button arvauto-open-myaccount">&nbsp;</button>
+	</section>
+	<section class="arvauto-events-infos">
+		<header class="arvauto-events-infos-header">
+			<a href="/" class="arvauto-home-link"><img class="arvauto-logo" alt="Arvauto" src="images/arvauto.png"></a>
+		</header>
+		<div class="arvauto-events-infos-content">
+			<h2>{Type d'evenement}</h2>
+			<p class="arvauto-events-description">{la description elle est longue, vraiment longue, nan la description gros porc !}</p>
+			<p class="arvauto-events-meta">Créer le {fou la date} par {fou le nom}</p>
+		</div>
+		<button id="close-event" class="arvauto-button arvauto-close-event">&nbsp;</button>
+	</section>
+	<section class="arvauto-events-myaccount">
+		<header class="arvauto-user-board">
+			<img class="arvauto-user-avatar" alt=avatar src="images/avatar.jpg" />
+			<p class="arvauto-user-name">{Prénom} {Nom}</p>
+		</header>
+		<p>Email : {email du guss à deux pates}</p>
+
+        <button id="close-myaccount" class="arvauto-button arvauto-close-myaccount">&nbsp;</button>
+
+	</section>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/map.js"></script>
+    <script type="text/javascript" src="/js/map.events.js"></script>
+</body>
 </html>

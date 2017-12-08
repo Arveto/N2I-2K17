@@ -14,6 +14,7 @@ html {
 body.arvauto {
 	background: url("../images/background.jpg") fixed center no-repeat #17476F;
 	font-family: 'Nunito', sans-serif;
+	font-size: 15px;
 	height: 100%;
 	width: 100%;
 	margin: 0;
@@ -194,6 +195,109 @@ h2.arvauto-sam-games {
 	color: white;
 }
 
+/* events page */
+
+section.arvauto-events {
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+div#map {
+	height: 100%;
+	width: 100%;
+}
+
+section.arvauto-events button.arvauto-add-event {
+	border: outset 2px #9F103C;
+	background: #9F103C;
+	border-radius: 50%;
+	text-align: center;
+	font-weight: 900;
+	cursor: pointer;
+	font-size: 30px;
+	position: fixed;
+	color: white;
+	bottom: 10px;
+	height: 50px;
+	width: 50px;
+	left: 10px;
+	padding: 0;
+	z-index:1;
+}
+
+section.arvauto-events-infos,
+section.arvauto-events-myaccount {
+	background: #17476F;
+	position: fixed;
+	height: 100%;
+	color: white;
+	z-index: 2;
+	top: 0;
+}
+
+section.arvauto-events-infos {
+	transition: left 1.5s;
+	width: 25%;
+	left: 0;
+}
+
+section.arvauto-events-myaccount {
+	transition: right 1.5s;
+	width: 20%;
+	right: 0;
+}
+
+section.arvauto-events-infos header.arvauto-events-infos-header,
+section.arvauto-events-infos img.arvauto-logo {
+	height: auto;
+	width: 100%;
+}
+
+section.arvauto-events-infos a.arvauto-home-link {
+	display: block;
+	margin: auto;
+	width: 65%;
+	height: auto;
+}
+
+section.arvauto-events-infos *.arvauto-events-infos-content {
+	width: 86%;
+	padding: 0 7%;
+}
+
+section.arvauto-events-infos h2 {
+	text-align: center;
+	font-size: 35px;
+	width: 100%;
+}
+
+section.arvauto-events-infos p.arvauto-events-description,
+section.arvauto-events-infos p.arvauto-events-meta {
+	background: #123B5A;
+	border-radius: 15px;
+	margin: 10% 0;
+	padding: 5%;
+}
+
+section.arvauto-events-infos p.arvauto-events-meta {
+	font-style: italic;
+}
+
+section.arvauto-events-infos button.arvauto-close-event {
+	border: outset 2px #9F103C;
+	background: url("../images/cross.png") no-repeat center #9F103C;
+	background-size: 35px 35px;
+	border-radius: 50%;
+	cursor: pointer;
+	position: absolute;
+	bottom: 10px;
+	height: 50px;
+	width: 50px;
+	right: 10px;
+	z-index:3;
+}
+
 /* popups */
 
 .arvauto-popup {
@@ -237,13 +341,13 @@ h2.arvauto-sam-games {
 	width: 70%;
 }
 
-.arvauto-login form section.arvauto-form-section, 
+.arvauto-login form section.arvauto-form-section,
 .arvauto-login form section.arvauto-login-button-pane {
 	margin: 20px 0;
 }
 
 .arvauto-login form section.arvauto-form-section {
-	
+
 }
 
 .arvauto-login form section.arvauto-login-button-pane {
@@ -251,7 +355,7 @@ h2.arvauto-sam-games {
 	vertical-align: bottom;
 }
 
-.arvauto-login form .arvauto-login-label, 
+.arvauto-login form .arvauto-login-label,
 .arvauto-login form .arvauto-login-input {
 	display: block;
 	width: 100%;
@@ -295,8 +399,8 @@ section.arvauto-main-menu {
 	text-align: center;
 }
 
-section.arvauto-main-menu a.arvauto-menuitem, 
-section.arvauto-main-menu span.arvauto-menuitem-legend, 
+section.arvauto-main-menu a.arvauto-menuitem,
+section.arvauto-main-menu span.arvauto-menuitem-legend,
 section.arvauto-main-menu a.arvauto-menuitem img {
 	width: 300px;
 	height: 300px;
@@ -315,8 +419,8 @@ section.arvauto-sam-list {
 	margin: auto;
 }
 
-section.arvauto-sam-list a.arvauto-menuitem, 
-section.arvauto-sam-list span.arvauto-menuitem-legend, 
+section.arvauto-sam-list a.arvauto-menuitem,
+section.arvauto-sam-list span.arvauto-menuitem-legend,
 section.arvauto-sam-list a.arvauto-menuitem img {
 	width: 200px;
 	height: 200px;

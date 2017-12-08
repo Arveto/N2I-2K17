@@ -14,110 +14,154 @@ var connection = mysql.createConnection({
         database : 'arvauto'
     });
 
+var chatEvents = require('./events.js');
+
 app.use(express.static(path.join(__dirname, 'public')));
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
+try{
+  // Handle 404
+  app.use(function(req, res) {
+     res.sendFile(__dirname + '/error.html', 404);
+  });
+
+  // Handle 500
+  app.use(function(error, req, res, next) {
+     res.sendFile(__dirname + '/error.html', 500);
+  });
+}catch(e){};
+
+
+var password;
+
     //Routes
+var cookies;    //Checks if they
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/events', function(req, res){
-    res.sendFile(__dirname + '/events.html');
+app.get('/map', function(req, res){
+    res.sendFile(__dirname + '/map.html');
 });
 
-app.get('/events/:eventId', function(req, res){
-    res.sendFile(__dirname + '/events.html');
-});
-
+//TODO ajouter apreeeees
 app.get('/sam', function(req, res){
     res.sendFile(__dirname + '/sam.html');
 });
-
+/*
 app.get('/sam/:samId', function(req, res){
     res.sendFile(__dirname + '/sam.html');
 });
-
+*/
 app.get('/about', function(req, res){
     res.sendFile(__dirname + '/about.html');
 });
 
+app.get('/signup', function(req, res){
+    res.sendFile(__dirname + '/signup.html');
+});
+
+app.get('/error', function(req, res){
+    res.sendFile(__dirname + '/error.html');
+});
+
+app.get('/bombe', function(req, res){
+    res.sendFile(__dirname + '/bombe.html');
+});
+
+app.get('/bouteille', function(req, res){
+    res.sendFile(__dirname + '/bouteille.html');
+});
+
     //Inscription / login form
 app.post('/signup', urlencodedParser, function(req, res){
+    console.log('receiving form, pass= '+req.body.pass);
     var queryString = "INSERT INTO arvauto_users (`email`, `pass`, `familyname`, `firstname`) VALUES (?, ?, ?, ?)";
-    connection.query(queryString, [email, password, familyname, firstname], function(error, result, fields){
+    connection.query(queryString, [req.body.email, req.body.password, req.body.familyname, req.body.firstname], function(error, result, fields){
         if (error) throw error;
-    };
+    });
     res.cookie('email', req.body.email);
     res.cookie('familyname', req.body.familyname);
     res.cookie('firstname', req.body.firstname);
 
-    var queryString = "UPDATE users SET socket_id = ? WHERE pass = ?";   //Updates user socket_id
-    connection.query(queryString, [socket.id, req.body.pass], function(error, result, fields){
-        if (error) throw error;
-    });
+    password = req.body.password;
 
-    var queryString = "UPDATE users SET connected = 1 WHERE pass = ?";   //Updates user connection status
+    var queryString = "UPDATE arvauto_users SET connected = 1 WHERE pass = ?";   //Updates user connection status
     connection.query(queryString, [req.body.pass], function(error, result, fields){
         if (error) throw error;
     });
 
+    res.redirect('/');
+
 });
 
 app.post('/', urlencodedParser, function(req, res){
-    if (error) throw error;
 
+    console.log(req.body.password);
     var familyname;
     var firstname;
 
-    var loginOK = 1;//TODO Verification login OK
+    var loginOK = 1;
 
     var queryString = 'SELECT familyname FROM arvauto_users WHERE pass = ?';
     connection.query(queryString, [req.body.password], function(error, result, fields){
         if(error){
             throw error;
-            loginOK = 0;
+
         }
-        familyname = result[0].familyname;
+        console.log(result[0]);
+        try{
+            familyname = result[0].familyname;
+        }
+        catch(e){
+            loginOK=0;
+        }
     });
 
     var queryString = 'SELECT firstname FROM arvauto_users WHERE pass = ?';
     connection.query(queryString, [req.body.password], function(error, result, fields){
         if(error){
             throw error;
+
+        }
+        try{
+            firstname = result[0].firstname;
+        }
+        catch(e){
             loginOK = 0;
         }
-        firstname = result[0].firstname;
     });
 
     if(loginOK){
         res.cookie('email', req.body.email);
         res.cookie('familyname', familyname);
         res.cookie('firstname', firstname);
-        res.redirect('/')
+        console.log("adding cookies");
     }
-    else{
+        console.log(loginOK);
         res.redirect('/');
-    }
+
 });
 
 
     //Socket.io
 io.sockets.on('connection', function(socket){
-
-    var queryString = "UPDATE users SET event_id = 0 WHERE pass = ?";   //Updates user event_id
-    connection.query(queryString, [req.body.pass], function(error, result, fields){
+    var queryString = "UPDATE arvauto_users SET event_id = 0 WHERE pass = ?";   //Updates user event_id
+    connection.query(queryString, [password], function(error, result, fields){
         if (error) throw error;
     });
 
-    var queryString = "UPDATE users SET connected = 0 WHERE pass = ?";   //Updates user connection status
-    connection.query(queryString, [req.body.pass], function(error, result, fields){
+    var queryString = "UPDATE arvauto_users SET connected = 0 WHERE pass = ?";   //Updates user connection status
+    connection.query(queryString, [password], function(error, result, fields){
         if (error) throw error;
     });
 
-    socket.on('disconnect', function(){
+    var queryString = "UPDATE arvauto_users SET socket_id = ? WHERE pass = ?";   //Updates user connection status
+    connection.query(queryString, [socket.id, password], function(error, result, fields){
+        if (error) throw error;
+    });
 
-    })
+    chatEvents.foo(socket, connection);   //Events
 });
 
 server.listen(80);
