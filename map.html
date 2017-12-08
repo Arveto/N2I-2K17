@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/map.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWGdneRabFdxPsdNRy0gx4YMdoInHCZsk&callback=initMap"></script>
+  </head>
+  <body>
+    <h3 tabindex='0'>My Google Maps Demo</h3>
+    <div id="map"></div>
+
+    <div class="newEvent">
+      Genre :<br>
+
+        <input type="radio" name="type" value="Circulation">
+        <label for="contactChoice1">Circulation</label> <br>
+
+        <input type="radio" name="type" value="Radar">
+        <label for="contactChoice1">Radar</label> <br>
+
+        <input type="radio" name="type" value="Accident">
+        <label for="contactChoice1">Accident</label> <br>
+
+        <input type="radio" name="type" value="Verglas">
+        <label for="contactChoice1">Verglas</label> <br>
+
+        <input type="radio" name="type" value="Inondations">
+        <label for="contactChoice1">Inondations</label> <br>
+ <br><br>
+
+      <textarea name="desc" placeholder="Décrivez l'évènement.."></textarea>
+      <button id="submit" type="submit" name="button">SUBMIT</button>
+    </div>
+
+    <button>+</button>
+
+    <script type="text/javascript" src="/js/map.js"></script>
+    <script type="text/javascript" src="/js/map.events.js"></script>
+  </body>
+</html>
