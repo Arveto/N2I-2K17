@@ -5,7 +5,6 @@ document.body.appendChild(app.view);
   //canva content
 var arrow = PIXI.Sprite.fromImage('./arrow.png');
 
-var toggle = false;
 var foo = Math.floor((Math.random() * 10) + 1);
 
 arrow.anchor.set(0.5);   //center the anchor
